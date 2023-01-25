@@ -1,6 +1,6 @@
-# **CSI606-2021-02 - Remoto - Proposta de Trabalho Final**
+# **CSI606-2022-02 - Presencial - Proposta de Trabalho Final**
 
-## *Aluna(o): Princesa Leia (Luke Skywalker)*
+## *Aluno: Leonardo Moreira*
 
 --------------
 
@@ -8,17 +8,21 @@
 
 ### Resumo
 
-  (Apresentar um breve resumo sobre o seu trabalho, indicando o contexto e as principais funcionalidades.)
+  Meu projeto consiste em um serviço de streaming de videos com o nome de __Panda Filmes__ que permitirá aos usuários assistir, gerenciar e interagir com videos na plataforma, podendo comentar em videos, curtir e assistir os próprios videos e os de outros usuários.
 
 <!-- Apresentar o tema. -->
 ### 1. Tema
 
-  O trabalho final tem como tema o desenvolvimento de ...
+  O trabalho final tem como tema o desenvolvimento de um sistema para streaming de videos.
 
 <!-- Descrever e limitar o escopo da aplicação. -->
 ### 2. Escopo
 
-  Este projeto terá as seguintes funcionalidades...
+  Este projeto terá as seguintes funcionalidades: 
+
+   * Cadastro e autenticação de usuários.
+   * Upload e gestão dos videos no painel do usuário.
+   * Visualização e interação com os videos da plataforma.
 
 <!-- Apresentar restrições de funcionalidades e de escopo. -->
 ### 3. Restrições
