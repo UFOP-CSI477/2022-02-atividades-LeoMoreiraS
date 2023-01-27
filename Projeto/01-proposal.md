@@ -32,7 +32,7 @@
 <!-- Construir alguns protótipos para a aplicação, disponibilizá-los no Github e descrever o que foi considerado. //-->
 ### 4. Protótipo
 
-  Protótipos para as páginas (descrever quais páginas) foram elaborados, e podem ser encontrados em...
+  Protótipos para as páginas de login/cadastro, menu principal e perfil do usuário foram elaborados, e podem ser encontrados em [Figma](https://www.figma.com/file/SD4REdXoS5bIMLNaPzySu4/Untitled?node-id=0%3A1&t=p4Xy4KVFSn5S1OBh-1)
 
 ### 5. Referências
 
