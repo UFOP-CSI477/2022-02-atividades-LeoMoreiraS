@@ -11,8 +11,59 @@ datasource db {
 }
 
 
-model User {
+model People {
   id    Int     @id @default(autoincrement())
-  email String  @unique
   name  String?
+  street String  
+  number String
+  complement String
+  document String
+  city_id Int
+  city Cities @relation(fields: [city_id], references: [id])
+  type BloodType @relation(fields: [type_id], references: [id])
+  type_id Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model BloodType {
+  id Int @id @default(autoincrement())
+  peoples People[] 
+  type String
+  factor String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Cities {
+  id Int @id @default(autoincrement())
+  name String
+  peoples People[]
+  collectionLocations CollectionLocations[]
+  acronym String
+  state_id Int
+  state States @relation(fields: [state_id], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model States {
+  id Int @id @default(autoincrement())
+  name String
+  cities Cities[]
+  acronym String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model CollectionLocations {
+  id Int @id @default(autoincrement())
+  name String
+  street String
+  number String
+  complement String
+  city_id Int
+  city Cities @relation(fields: [city_id], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }

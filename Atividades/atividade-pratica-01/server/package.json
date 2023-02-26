@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "node ./dist/app.js",
-    "dev": "prisma migrate dev && nodemon -L -e ts --exec \"npm run build && npm start\"",
+    "dev": "nodemon -L -e ts --exec \"npm run build && npm start\"",
     "build": "tsc"
   },
   "author": "",
