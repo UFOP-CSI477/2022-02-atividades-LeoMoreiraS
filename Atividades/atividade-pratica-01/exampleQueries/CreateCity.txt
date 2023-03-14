@@ -1,0 +1,23 @@
+mutation {
+    createOneCities(
+      data: {
+        name: "Belo Horizonte",
+        acronym: "BH",
+        state: {
+          connect: {
+            id: 1
+          }
+        }
+      }
+    ) {
+      id
+      name
+      acronym
+      state {
+        id
+        name
+        acronym
+      }
+    }
+  }
+  

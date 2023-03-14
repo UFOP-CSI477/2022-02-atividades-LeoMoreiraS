@@ -1,0 +1,120 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator typegraphql {
+  provider = "typegraphql-prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model People {
+  id    Int     @id @default(autoincrement())
+  name  String?
+  street String  
+  number String
+  complement String
+  document String
+  city_id Int
+  city Cities @relation(fields: [city_id], references: [id])
+  type BloodType @relation(fields: [type_id], references: [id])
+  donations Donations[]
+  type_id Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model BloodType {
+  id Int @id @default(autoincrement())
+  peoples People[] 
+  type String
+  factor String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Cities {
+  id Int @id @default(autoincrement())
+  name String
+  peoples People[]
+  collectionLocations CollectionLocations[]
+  Units Units[]
+  acronym String
+  state_id Int
+  state States @relation(fields: [state_id], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model States {
+  id Int @id @default(autoincrement())
+  name String
+  cities Cities[]
+  acronym String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model CollectionLocations {
+  id Int @id @default(autoincrement())
+  name String
+  street String
+  number String
+  complement String
+  city_id Int
+  donations Donations[]
+  city Cities @relation(fields: [city_id], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Units  {
+  id Int @id @default(autoincrement())
+  name String
+  number String
+  complement String
+  distributions Distributions[]
+  city_id Int
+  city Cities @relation(fields: [city_id], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Donations {
+  id  Int @id @default(autoincrement())
+  data DateTime
+  people_id Int
+  people People @relation(fields: [people_id], references: [id]) 
+  location_id Int
+  location CollectionLocations @relation(fields: [location_id], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Products {
+  id Int @id @default(autoincrement())
+  label String
+  donation_id Int
+  due_date DateTime
+  Distributions Distributions[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Distributions {
+  id Int @id @default(autoincrement())
+  product_id Int
+  products Products @relation(fields: [product_id],references: [id])
+  unit_id Int
+  unit Units @relation(fields: [unit_id],references: [id])
+  date DateTime
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
