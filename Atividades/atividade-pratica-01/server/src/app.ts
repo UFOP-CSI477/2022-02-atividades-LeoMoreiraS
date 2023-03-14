@@ -3,10 +3,12 @@ import express from "express";
 import { graphqlHTTP } from "express-graphql";
 import { resolvers } from "@generated/type-graphql";
 import dotenv from "dotenv";
-const app = express();
 import { buildSchema } from "type-graphql";
 import { PrismaClient } from '@prisma/client';
+import cors from "cors";
 
+const app = express();
+app.use(cors());
 const prisma = new PrismaClient();
 
 const schema = await buildSchema({
