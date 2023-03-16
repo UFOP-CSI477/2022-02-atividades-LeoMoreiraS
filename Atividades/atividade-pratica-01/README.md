@@ -1,69 +1,24 @@
-# CSI606 - Sistemas WEB I - SI-06
+# Blood Donation API
 
-## Período Letivo 2022/2
+This is a GraphQL API that provides blood donations management.
 
-### Prof. Fernando Bernardes de Oliveira, Ph.D.
+# Technologies
+Node.js
+Express.js
+GraphQL
+Prisma ORM
+TypeGraphQL
 
----
+# How to start/build the server using Docker Compose
+- Install Docker and Docker Compose if you haven't already.
+- Clone the repository: git clone https://github.com/UFOP-CSI477/2022-02-atividades-LeoMoreiraS.git
+- Navigate to the project directory: cd Atividades\atividade-pratica-01\server
+- Rename the .env.example file to .env.
+- cp .env.example .env
+- Run the following command to start the containers:
+ docker-compose up --build
 
-## **Atividades Práticas**
+# How to test
+After starting the server, you can test the GraphQL endpoint by visiting http://localhost:3333/graphql, which will open the GraphQL Playground.
 
-### Instruções/regras
-
-1. As atividades são **INDIVIDUAIS**.
-
-1. Em caso de caracterização de cópia entre pessoas e/ou da internet (sem a devida referência), **TODOS** os envolvidos terão **nota zero** (0). Códigos utilizados por pessoas de outros semestres também causam a eliminação da atividade.
-
-1. **Entrega:**
-
-    - **GitHub**: código-fonte e afins. Insira os arquivos criados nas pastas conforme a entrega no seu repositório no GitHub.  
-        = **Atividades/atividade-pratica/sever**  
-        = **Atividades/atividade-pratica/web**  
-    - As datas para as entregas estão disponíveis no Moodle.
-
-## Desenvolvimento: Sistema de Controle de Doação de Sangue
-
-O objetivo deste sistema é controlar o processo de doação de sangue numa determina instituição. O diagrama do banco de dados completo é apresentado na [figura abaixo](../../Codes/database-model/CSI606-sistema-doacao-sangue.png). Você pode acessar também o modelo definido a partir do [DBDiagram](https://dbdiagram.io/d/630d077e0911f91ba5ecf743).
-
-![Diagrama completo do banco de dados](../../Codes/database-model/CSI606-sistema-doacao-sangue.png)
-
-Este modelo será utilizado para as duas atividades práticas. O escopo de cada atividade será definido apropriadamente.
-
----
-
-## **Atividade Prática 1**
-
-No caso da **Atividade 1** é esperado que vocês desenvolvam uma API RESTful para as seguintes entidades: *pessoas*, *tipos_sanguineos*, *locais_coleta* e *doacoes*. Vocês pode utilizar o desenvolvimento de *estados* e *cidades* que será realizado em sala de aula. Considere as seguintes operações:
-
-- Inserir - *create*
-- Atualizar - *update*
-- Excluir - *delete*
-- Recuperar - *read* - todos os itens, por *id* e por *nome* (quando se aplicar).
-
-É sugerido que vocês utilizem **Node.js com TypeScript** para esse desenvolvimento. Contudo, isso não é necessário. Vocês podem, inclusivem, utilizar outas tecnologias às suas preferências. É sugerido também que vocês estudem outras arquiteturas de software, além da estrutura que foi utilizada.
-
-Sintam-se livres para as escolhas e documentem, por gentileza, utilizando o **README.md** das suas respectivas atividades, as tecnologias, as arquiteturas, os passos para execução e demais itens que julgarem importantes.
-
----
-
-## **Atividade Prática 2**
-
-A Atividade Prática 2 consiste na implementação da interface Web (em *React* ou algum *framework* de sua preferência) das entidades indicadas na **Atividade Prática 1**.
-
-Sigam, por gentileza, as mesmas recomendações e considerações indicadas na primeira atividade.  
-
----
-
-**Uma excelente atividade para vocês!**
-
----
-
-***Let's code!***
-
-![Let's code!](https://media.giphy.com/media/USV0ym3bVWQJJmNu3N/giphy.gif)
-
-![Happy coding](https://media.giphy.com/media/3bu85lsWhBTlWcOMN6/giphy.gif)
-
-> ***What we have to learn to do, we learn by doing.***  
->
-> --- Aristóteles.
+If you need to use Prisma Studio, change the env database_url to localhost instead of db("postgresql://postgres:postgres@db:5432/db_name?schema=public" to "postgresql://postgres:postgres@localhost:5432/db_name?schema=public"), because it does not recognize "db" outside of Docker, and inside of Docker, you can't expose Prisma Studio port.
