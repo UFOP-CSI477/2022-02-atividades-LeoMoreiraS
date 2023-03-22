@@ -1,7 +1,6 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import App from './App';
 import Cities from './components/estados/Cities';
-import CreateCities from './components/estados/CreateCities';
 import CreateState from './components/estados/CreateStates';
 import ListEstados from './components/estados/ListEstados';
 
