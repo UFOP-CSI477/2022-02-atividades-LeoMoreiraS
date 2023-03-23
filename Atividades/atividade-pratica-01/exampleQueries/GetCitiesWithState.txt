@@ -1,0 +1,11 @@
+query{
+  findManyCities(where:{}){
+    id
+    name
+    acronym
+    state{
+      id
+      name
+    }
+  }
+}
