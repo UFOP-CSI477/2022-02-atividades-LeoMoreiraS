@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../../services/api";
 import AbstractModal from "../modal/AbstractModal";
 
@@ -273,6 +274,7 @@ const Cities = () => {
                 data={formData}
                 setter={setFormData}
             />
+            <Link to="/">voltar</Link>
         </div>
 
     );

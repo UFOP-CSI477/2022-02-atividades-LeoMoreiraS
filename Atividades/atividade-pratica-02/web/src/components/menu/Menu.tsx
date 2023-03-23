@@ -10,6 +10,8 @@ const Menu = () => {
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/estados">Estados</Link></li>
                 <li><Link to="/cidades">Cidades</Link></li>
+                <li><Link to="/tipoSanguineo">Tipo Sanguíneo</Link></li>
+                <li><Link to="/coleta">Locais de Coleta</Link></li>
             </ul>
         </div>
     );

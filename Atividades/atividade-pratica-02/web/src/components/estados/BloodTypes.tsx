@@ -3,55 +3,55 @@ import { Link } from "react-router-dom";
 import api from "../../services/api";
 import AbstractModal from "../modal/AbstractModal";
 
-interface IStates {
+interface IBloodTypes {
     id: number;
-    name: string;
-    acronym: string;
+    type: string;
+    factor: string;
     created_at: string;
     updated_at: string;
 }
-type State = {
+type BloodType = {
     id: number,
-    name: string,
-    acronym: string,
+    type: string,
+    factor: string,
 }
 
 
-const getStatesQuery = {
+const getBloodTypeQuery = {
     query: `query    {
-        findManyStates(where:{}) {
+        bloodTypes(where:{}) {
             id
-            name
-              acronym
+            type
+              factor
               created_at
               updated_at
         }
       }`,
 };
 
-const States = () => {
+const BloodTypes = () => {
     const [trigger, setTrigger] = useState<Boolean>(false)
-    const [States, setStates] = useState<IStates[]>([]);
+    const [BloodTypes, setBloodTypes] = useState<IBloodTypes[]>([]);
 
     useEffect(() => {
-        api.post("", getStatesQuery).then((response) => {
-            const { findManyStates } = response.data.data;
-            setStates(findManyStates.sort((a:IStates,b:IStates)=>(a.id-b.id)));
+        api.post("", getBloodTypeQuery).then((response) => {
+            const { bloodTypes } = response.data.data;
+            setBloodTypes(bloodTypes.sort((a:IBloodTypes,b:IBloodTypes)=>(a.id-b.id)));
             if(trigger)
                 setTrigger(false);
         });
     }, [trigger]);
 
 
-    const [name, setName] = useState<string>("");
-    const [acronym, setAcronym] = useState<string>("");
+    const [factor, setFactor] = useState<string>("");
+    const [type, setType] = useState<string>("");
 
 
     const [isOpen, setIsOpen] = useState(false);
-    const [formData, setFormData] = useState<State>({
-        name: "",
+    const [formData, setFormData] = useState<BloodType>({
+        factor: "",
         id: 0,
-        acronym: "",
+        type: "",
     });
 
 
@@ -61,35 +61,35 @@ const States = () => {
             .post("", {
                 query: `
         mutation {
-            updateOneStates(
+            updateOneBloodType(
               where: { id: ${formData.id} }
               data: {
-                name: {set: "${formData.name}"}
-                acronym: {set: "${formData.acronym}"}
+                factor: {set: "${formData.factor}"}
+                type: {set: "${formData.type}"}
               }
             ) {
               id
-              name
-              acronym
+              factor
+              type
             }
           }`,
             })
             .then((response) => {
                 if (response.status === 200) {
-                    setName("");
-                    setAcronym("");
+                    setFactor("");
+                    setType("");
                     setTrigger(true);
                     alert("Atualizado com sucesso");
                 } else {
-                    setName("Erro na atualização");
-                    setAcronym("Erro na atualização");
+                    setFactor("Erro na atualização");
+                    setType("Erro na atualização");
                     alert("Erro na atualização");
                 }
             });
 
     };
     console.log(formData)
-    const handleOpen = (data: State) => {
+    const handleOpen = (data: BloodType) => {
         console.log(data);
         setIsOpen(true);
         setFormData(data)
@@ -104,28 +104,30 @@ const States = () => {
         api
             .post("", {
                 query: `
-            mutation    {
-                createOneStates(data: {
-                      name: "${name}"
-                      acronym: "${acronym.toLocaleUpperCase()}"
-                }){
-                  id
-                  name
-                  acronym
-                  created_at
-                  updated_at    
-                }
-              }`,
+                mutation {
+                    createOneBloodType(
+                      data: {
+                        type: "${type}"
+                        factor: "${factor}"
+                      }
+                    ) {
+                      id
+                      type
+                      factor
+                      updated_at
+                      created_at    
+                    }
+                  }`,
             })
             .then((response) => {
                 if (response.status === 200) {
-                    setName("");
-                    setAcronym("");
+                    setFactor("");
+                    setType("");
                     setTrigger(true);
                     alert("Criado com sucesso");
                 } else {
-                    setName("Erro no cadastro");
-                    setAcronym("Erro no cadastro");
+                    setFactor("Erro no cadastro");
+                    setType("Erro no cadastro");
                     alert("Erro no cadastro");
                 }
             });
@@ -135,26 +137,26 @@ const States = () => {
     return (
         <div>
             <div>
-                <h3>Cadastro de Estados</h3>
+                <h3>Cadastro de Tipo Sanguíneo</h3>
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="name">Nome</label>
+                        <label htmlFor="factor">Fator</label>
                         <input
                             type="text"
-                            name="name"
-                            id="name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            name="factor"
+                            id="factor"
+                            value={factor}
+                            onChange={(e) => setFactor(e.target.value)}
                         ></input>
                     </div>
                     <div>
-                        <label htmlFor="acronym">Sigla</label>
+                        <label htmlFor="acronym">Tipo</label>
                         <input
                             type="text"
                             name="acronym"
                             id="acronym"
-                            value={acronym}
-                            onChange={(e) => setAcronym(e.target.value)}
+                            value={type}
+                            onChange={(e) => setType(e.target.value)}
                         ></input>
                     </div>
                     <button type="submit">Cadastrar</button>
@@ -163,14 +165,14 @@ const States = () => {
             </div>
 
             <div>
-                <h2>Lista de Estados</h2>
+                <h2>Lista de Tipo Sanguíneo</h2>
 
                 <table>
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nome</th>
-                            <th>Sigla</th>
+                            <th>Fator</th>
+                            <th>Tipo</th>
                             <th>Criado</th>
                             <th>Alterado</th>
                             <th>Editar</th>
@@ -179,18 +181,18 @@ const States = () => {
                     </thead>
 
                     <tbody>
-                        {States.map((State) => (
-                            <tr key={State.id}>
-                                <td>{State.id}</td>
-                                <td>{State.name}</td>
-                                <td>{State.acronym}</td>
-                                <td>{new Date(State.created_at).toLocaleDateString("pt-br")}</td>
-                                <td>{new Date(State.updated_at).toLocaleDateString("pt-br")}</td>
-                                <td><button onClick={(e) => { handleOpen({ name: State.name, acronym: State.acronym, id: State.id }) }}>edit</button></td>
+                        {BloodTypes.map((BloodType) => (
+                            <tr key={BloodType.id}>
+                                <td>{BloodType.id}</td>
+                                <td>{BloodType.factor}</td>
+                                <td>{BloodType.type}</td>
+                                <td>{new Date(BloodType.created_at).toLocaleDateString("pt-br")}</td>
+                                <td>{new Date(BloodType.updated_at).toLocaleDateString("pt-br")}</td>
+                                <td><button onClick={(e) => { handleOpen({ factor: BloodType.factor, type: BloodType.type, id: BloodType.id }) }}>edit</button></td>
                                 <td><button onClick={() => {
                                     api.post('', {
                                         query: `mutation {
-                                                    deleteOneStates(where: { id: ${State.id} }) {
+                                                    deleteOneBloodType(where: { id: ${BloodType.id} }) {
                                                         id
                                                         name
                                                         acronym
@@ -210,7 +212,7 @@ const States = () => {
                     </tbody>
                 </table>
             </div>
-            <AbstractModal<State>
+            <AbstractModal<BloodType>
                 isOpen={isOpen}
                 onClose={handleClose}
                 onSubmit={handleSubmitModal}
@@ -223,4 +225,4 @@ const States = () => {
     );
 };
 
-export default States;
+export default BloodTypes;
