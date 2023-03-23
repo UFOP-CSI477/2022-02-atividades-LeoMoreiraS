@@ -3,6 +3,7 @@ import App from './App';
 import BloodTypes from './components/estados/BloodTypes';
 import Cities from './components/estados/Cities';
 import CollectionLocations from './components/estados/CollectionLocations';
+import Peoples from './components/estados/People';
 import States from './components/estados/States';
 
 
@@ -19,6 +20,7 @@ const AppRoutes = () => {
                 <Route path="/cidades" element={ <Cities/> } />
                 <Route path="/tipoSanguineo" element={ <BloodTypes/> } />
                 <Route path="/coleta" element={ <CollectionLocations/> } />
+                <Route path="/pessoas" element={ <Peoples/> } />
 
             </Routes>
         </BrowserRouter>
