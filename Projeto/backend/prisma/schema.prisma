@@ -1,0 +1,29 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./db.sqlite"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  videos    Video[]
+}
+
+model Video {
+  id        Int     @id @default(autoincrement())
+  name      String
+  url       String
+  thumbnail String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    Int
+  user      User    @relation(fields: [userId], references: [id])
+}
