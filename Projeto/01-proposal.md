@@ -8,7 +8,7 @@
 
 ### Resumo
 
-  Meu projeto consiste em um serviço de streaming de videos com o nome de __Panda Filmes__ que permitirá aos usuários assistir, gerenciar e interagir com videos na plataforma, podendo comentar em videos, curtir e assistir os próprios videos e os de outros usuários.
+  Meu projeto consiste em um serviço de streaming de videos com o nome de __Panda Filmes__ que permitirá aos usuários assistir, gerenciar e interagir com videos na plataforma.
 
 <!-- Apresentar o tema. -->
 ### 1. Tema
