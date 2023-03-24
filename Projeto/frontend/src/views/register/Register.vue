@@ -19,8 +19,18 @@
           </v-btn>
         </template>
       </v-snackbar>
-
       <v-form @submit.prevent="onSubmit">
+        <v-row>
+          <v-col cols="12">
+            <v-text-field
+              v-model="name"
+              label="Name"
+              outlined
+              required
+            ></v-text-field>
+          </v-col>
+        </v-row>
+
         <v-row>
           <v-col cols="12">
             <v-text-field
@@ -51,52 +61,54 @@
           </v-btn>
         </v-row>
       </v-form>
-      <v-row justify="center" class="mt-5">
-        <v-btn color="dark" @click="onGoToRegister">
-          Não tem uma conta? Registre-se aqui
+      <v-row class="mt-5" justify="center">
+        <v-btn color="dark" @click="onGoToLogin">
+          Já tem uma conta? Faça login aqui
         </v-btn>
       </v-row>
     </v-container>
   </v-container>
 </template>
-
 <script>
 import axios from "axios";
 
 export default {
-  name: "HomeView",
-
+  name: "SignUpView",
+  snackbar: false,
   data: () => ({
     loading: false,
+    name: "",
     email: "",
     password: "",
   }),
 
   methods: {
+    onGoToLogin() {
+      this.$router.push("/");
+    },
     useSnackbar(type, msg) {
       this.type = type;
       this.msg = msg;
       this.snackbar = true;
     },
-    onGoToRegister() {
-      this.$router.push("/register");
-    },
     onSubmit() {
       this.loading = true;
 
       const data = {
+        name: this.name,
         email: this.email,
         password: this.password,
       };
 
       axios
-        .post("http://localhost:3000/login", data)
+        .post("http://localhost:3000/user", data)
         .then((response) => {
+          this.useSnackbar("success darken-1", "cadastro feito!");
           console.log(response.data);
           this.$router.push("/list");
         })
         .catch((error) => {
-          this.useSnackbar("error darken-1", "Erro no login!");
+          this.useSnackbar("warning darken-1", "erro no cadastro!");
           console.log(error);
           this.loading = false;
         });
