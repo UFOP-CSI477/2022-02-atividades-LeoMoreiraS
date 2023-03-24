@@ -1,29 +1,49 @@
-import path from "path";
-import fs from "fs";
-import { ICreateUserService } from "./ICreateUserService";
+import { PrismaClient, User } from '@prisma/client';
+import bcrypt from 'bcrypt';
+import { IUserRepository } from "./IUserRepository";
 
 export class UserRepository implements IUserRepository {
-  private static instance: IUserRepository;
 
-  private constructor() {}
-  
-  public static getInstance(): IUserRepository {
-    if (!this.instance) {
-      this.instance = new UserRepository();
-      return this.instance;
-    } else {
-      return this.instance;
-    }
+  private prisma: PrismaClient;
+
+  constructor() {
+    this.prisma = new PrismaClient()
+
   }
 
-  find(user:string) {
-    if (!user){
-        return null;
-    }
 
+ async createUser(data: Omit<User, 'id' | 'createdAt' | 'updatedAt'>): Promise<User> {
+  const hashedPassword = await bcrypt.hash(data.password, 10);
+  return this.prisma.user.create({
+    data: {
+      ...data,
+      password: hashedPassword,
+    },
+  });
+}
 
+ async  getUserById(id: number): Promise<User | null> {
+  return this.prisma.user.findUnique({
+    where: { id },
+  });
+}
 
-    return user;
-    
-  }
+ async  getUserByEmail(email: string): Promise<User | null> {
+  return this.prisma.user.findUnique({
+    where: { email },
+  });
+}
+
+ async  updateUser(id: number, data: Partial<User>): Promise<User | null> {
+  return this.prisma.user.update({
+    where: { id },
+    data,
+  });
+}
+
+ async deleteUser(id: number): Promise<User | null> {
+  return this.prisma.user.delete({
+    where: { id },
+  });
+}
 }

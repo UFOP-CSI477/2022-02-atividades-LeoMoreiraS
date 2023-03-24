@@ -1,4 +1,6 @@
+import { User } from "@prisma/client";
+
 export interface ICreateUserService {
-    execute(user:string, password:string): Promise<string>;
+  execute(user: Omit<User, 'id' | 'createdAt' | 'updatedAt'>):Promise<User>;
   }
   

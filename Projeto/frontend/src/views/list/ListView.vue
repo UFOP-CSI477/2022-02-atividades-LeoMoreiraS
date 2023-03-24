@@ -175,7 +175,7 @@
 <script>
 export default {
   name: "ExploreView",
-
+  userId: 1,
   data: () => ({
     loading: false,
     list: [],
@@ -233,6 +233,7 @@ export default {
         let formData = new FormData();
         formData.append("video", this.form.video);
         formData.append("jpeg", this.form.thumbnail);
+        formData.append("userId", this.userId);
 
         await this.$axios
           .post("http://localhost:3000/upload", formData)
