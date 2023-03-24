@@ -21,7 +21,7 @@ export class UserLoginController {
       return response.status(401).json({ message: 'Invalid email or password' });
     }
   
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, {
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string||"1", {
       expiresIn: '1h',
     });
   
