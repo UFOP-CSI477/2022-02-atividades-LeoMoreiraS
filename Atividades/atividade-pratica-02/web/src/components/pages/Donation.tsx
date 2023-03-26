@@ -219,7 +219,7 @@ const Donations = () => {
                 <h3>Cadastro de Doações</h3>
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="data">Rua</label>
+                        <label htmlFor="data">Data</label>
                         <input
                             type="date"
                             name="data"
